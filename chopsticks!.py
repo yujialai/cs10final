@@ -117,17 +117,17 @@ def computerplay(): #big function contain other funcs.
     def easy(): #Changes own and opp hand. LAI
         global ownhand
         global valueonhand
-        if valueonhand[0] == 0:
+        if valueonhand[0] == 5:
             ownhand = 1
-        elif valuesonhand[1] == 2:
+        elif valueonhand[1] == 5:
             ownhand = 0
         else:
             ownhand = random.randint(0,1)
         time.sleep(1)
         global opponents_hand
-        if valueonhand[2] == 0:
+        if valueonhand[2] == 5:
             opponenthand = 3
-        elif valueonhand[3] == 0:
+        elif valueonhand[3] == 5:
             opponenthand = 2
         else:
             opponenthand = random.randint(2,3)
@@ -266,23 +266,13 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
-            choice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        choice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        if choice == "l" or choice == "r":
-            choice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        if choice == "l" or choice == "r":
             break
     if choice == "l":
         ownhand = 2
     else:
         ownhand = 3
     while True:
-        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        if choice == "l" or choice == "r":
-            choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        if choice == "l" or choice == "r":
-            choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
+        choice = input("Do you want to increase the opponents 'l' or 'r' hand (your perspective)? ")
         if choice == "l" or choice == "r":
             break
     if choice == "l":
