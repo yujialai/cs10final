@@ -147,7 +147,7 @@ def computerplay(): #big function contain other funcs.
         else:
             easy()
 
-    def createmovenottomake(handvalue): #reportor.take in valueonhand
+    def createmovenottomake(handvalue): #reporter.take in valueonhand
         global movenottomake
         resultsofpossiblemoves = []
         playershand = []
@@ -163,7 +163,7 @@ def computerplay(): #big function contain other funcs.
         for player in range(0,2):
             for possibilities in range(0,4):
                 if playershand[player] + resultsofpossiblemoves[possibilities] == 5:
-                    if not result.contains(possibilities):
+                    if not possibilities in result:
                         result.append(possibilities)
         movenottomake = result
 
@@ -230,7 +230,7 @@ def computerplay(): #big function contain other funcs.
         createmovenottomake(valueonhand)
         a = 0
         finish = False
-        if not howtowincomputer() == []:
+        if not howtowincomputer(valueonhand) == []:
             ownhand = howtowincomputer()[0]
             #UI stuff
             opponenthand = howtowincomputer()[1]
