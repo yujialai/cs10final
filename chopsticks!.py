@@ -108,7 +108,7 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
         else:
             print("Computer starts!")
             whoseturn = "c"
-    time.sleep(1)
+        time.sleep(1)
     t.clearscreen()
 
 def computerplay(): #big function contain other funcs.
@@ -187,8 +187,8 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     global ownhand
     global opponentshand
     while True:
-        coice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        if coice == "l" or choice == "r":
+        choice = input("Do you want to use your left 'l' or right 'r' hand? ")
+        if choice == "l" or choice == "r":
             choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
             break
@@ -197,8 +197,8 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     else:
         ownhand = 3
     while True:
-        coice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        if coice == "l" or choice == "r":
+        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
+        if choice == "l" or choice == "r":
             choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if choice == "l" or choice == "r":
             break
