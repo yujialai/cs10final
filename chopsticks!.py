@@ -104,7 +104,22 @@ def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player
         return 0
 
 def finishturn(): #updating the valueonhand + the UI hands VEDI
-    return ()
+    def updatenumbers():
+        global valueonhand
+        global opponentshand
+        global ownhand
+        valueonhand[opponentshand] = valueonhand[opponentshand] + valueonhand[ownhand]
+        while valueonhand[opponentshand] > 5:
+            valueonhand[opponentshand] -= 5
+    def updatehands(): 
+        global valuesonhand
+        clhand.shape(eval("cl"+str(valueonhand[0])))
+        crhand.shape(eval("cr"+str(valueonhand[1])))
+        plhand.shape(eval("pl"+str(valueonhand[2])))
+        prhand.shape(eval("pr"+str(valueonhand[3])))
+    updatenumbers()
+    updatehands()
+    
 
 def playerplay(): #choosehand with textinput and change global own and opp hand. JEAN
     global ownhand
