@@ -284,7 +284,7 @@ def finishturn(): #updating the valueonhand + the UI hands VEDI
         while valueonhand[opponenthand] > 5:
             valueonhand[opponenthand] -= 5
         if valueonhand[opponenthand] == 5:
-            handlist[0][opponenthand].shape(eval(handlist[1][opponenthand]+"5")
+            handlist[0][opponenthand].shape(eval(handlist[1][opponenthand]+"5"))
     def updatehands(): 
         global valueonhand
         if valueonhand[0] == 5:
@@ -315,45 +315,23 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
-<<<<<<< HEAD
-            choice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        if choice == "l" or choice == "r":
-            break
-    if choice == "l":
-        ownhand = 2
-    else:
-        ownhand = 3
-=======
             if choice == "l" and valueonhand[2] != 5:
                 ownhand = 2
                 break
             elif choice == "r" and valueonhand[3] != 5:
                 ownhand = 3
                 break
->>>>>>> origin/master
     while True:
-        choice = input("Do you want to increase the opponents 'l' or 'r' hand (your perspective)? ")
+        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if choice == "l" or choice == "r":
-<<<<<<< HEAD
-            choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        if choice == "l" or choice == "r":
-            break
-    if choice == "l":
-        opponentshand = 0
-    else:
-        opponentshand = 1
-
-=======
-            
-
-def losingscreen():
-    if choice == "l" and valueonhand[0] != 5:
-        opponenthand = 0
-        break
-    elif choice == "r" and valueonhand[1] != 5:
-        opponenthand = 1
-        break
->>>>>>> origin/master
+            if choice == "l" and valueonhand[0] != 5:
+                opponenthand = 0
+                break
+            elif choice == "r" and valueonhand[1] != 5:
+                opponenthand = 1
+                break
+        
+        
 def s():
     t.bgpic("looserscreen.gif")
 def s1():
