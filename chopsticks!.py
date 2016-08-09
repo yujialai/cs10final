@@ -42,9 +42,8 @@ for items in Shapes_to_register:
     #hands related
 valueonhand = [1, 1, 1, 1]#list contain finger numbers for each hands
     #use when play
-ownhand=0 #used in each turn choosing hands and adding hands. can be 0,1,2,3
-opponentshand=0 #same with above. can be 0,1,2,3
-recentchoice=0
+ownhand= 5 #used in each turn choosing hands and adding hands. can be 0,1,2,3
+opponentshand= 6 #same with above. can be 0,1,2,3
 movenottomake = []
     #whole game related
 move = 0 #steps you take to lose or win
@@ -267,13 +266,13 @@ while game == True:
         while whoseturn == "c":
             computerplay()
             whoseturn == "y"
-        finishturn()
+            finishturn()
         if not gameover(valueonhand) == 0:
             break
         while whoseturn == "y":
             playerplay()
             whoseturn = "c"
-        finishturn()
+            finishturn()
         move += 1
         if not gameover(valueonhand) == 0:
             break
