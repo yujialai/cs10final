@@ -104,6 +104,10 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
     t.clearscreen()
 
 def computerplay(): #big function contain other funcs.
+    global ownhand
+    global valueonhand
+    global opponenthand
+
     def easy(): #Changes own and opp hand. LAI
         global ownhand
         global valueonhand
@@ -134,6 +138,7 @@ def computerplay(): #big function contain other funcs.
     def medium():
         global ownhand
         global opponenthand
+        global valueonhand
         list = howtowincomputer(valueonhand)
         if howtowincomputer() != []:
             ownhand = list[0]
@@ -142,7 +147,7 @@ def computerplay(): #big function contain other funcs.
         else:
             easy()
 
-    def movenottomake(handvalue): #reportor.take in valueonhand
+    def createmovenottomake(handvalue): #reportor.take in valueonhand
         global movenottomake
         resultsofpossiblemoves = []
         playershand = []
@@ -166,25 +171,25 @@ def computerplay(): #big function contain other funcs.
     def rhandavformove(num): #take in num rep. move to take, can be 1234
         global valueonhand #boolean.are hands available for move?
         if num==1:
-            if valueonhand[0]==0 or valueonhand[2]==0:
+            if valueonhand[0]==5 or valueonhand[2]==5:
                 return False
             else:
                 return True
         else:
             if num==2:
-                if valueonhand[0]==0 or valueonhand[3]==0:
+                if valueonhand[0]==5 or valueonhand[3]==5:
                     return False
                 else:
                     return True
             else:
                 if num==3:
-                    if valueonhand[1]==0 or valueonhand[2]==0:
+                    if valueonhand[1]==5 or valueonhand[2]==5:
                         return False
                     else:
                         return True
                 else:
                     if num==4:
-                        if valueonhand[1]==0 or valueonhand[3]==0:
+                        if valueonhand[1]==5 or valueonhand[3]==5:
                             return False
                         else:
                             return True
@@ -220,7 +225,8 @@ def computerplay(): #big function contain other funcs.
         global movenottomake
         global ownhand
         global opponenthand
-        movenottomake()
+        global valueonhand
+        createmovenottomake(valueonhand)
         a = 0
         finish = False
         if not howtowincomputer() == []:
@@ -231,6 +237,7 @@ def computerplay(): #big function contain other funcs.
             easy()
         else:
             while finish == False :
+                print("Entering loop 1 in hard")
                 a = random.randint(1,4)
                 while a in movenottomake:
                     a = random.randint(1,4)
@@ -244,6 +251,7 @@ def computerplay(): #big function contain other funcs.
                         easy()
                         finish = True
     if level=="e":
+        print("entering easy")
         easy()
     elif level=="m":
         medium()
@@ -302,7 +310,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
                 opponenthand = 0
                 break
             elif choice == "r" and valueonhand[1] != 5:
-                ownhand = 1
+                opponenthand = 1
                 break
 
 def losingscreen():
