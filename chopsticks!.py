@@ -45,7 +45,7 @@ valueonhand = [1, 1, 1, 1]#list contain finger numbers for each hands
 ownhand=0 #used in each turn choosing hands and adding hands. can be 0,1,2,3
 opponenthand=0 #same with above. can be 0,1,2,3
 movenottomake = []
-handlist = [[clhand, crhand, plhand, prhand], [cl, cr, pl, pr]]
+handlist = [[clhand, crhand, plhand, prhand], ["cl", "cr", "pl", "pr"]]
     #whole game related
 move = 0 #steps you take to lose or win
 level = "" #difficulty level. can be equal to three different strings
@@ -302,7 +302,7 @@ def finishturn(): #updating the valueonhand + the UI hands VEDI
         if valueonhand[3] == 5:
             prhand.shape(handoutshape)
         else:
-            prhand.shape(eval("cr"+str(valueonhand[3])))
+            prhand.shape(eval("pr"+str(valueonhand[3])))
     updatenumbers()
     updatehands()
 
@@ -331,7 +331,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
                 opponenthand = 1
                 break
         
-        
+
 def s():
     t.bgpic("looserscreen.gif")
 def s1():
@@ -370,7 +370,7 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
         else:
             game = False
     elif num == 1:
-        losingscreen():
+        losingscreen()
         print("You lost after " + str(move) + " moves. Too bad!")
         choice = input("You wanna play again? Type 'Yes'!")
         if choice == 'Yes':
