@@ -1,3 +1,6 @@
 ###CS10 FINAL TESTING BLOCK
-def testing_function_with_input(func, input):
-    
+def test(func, given, output):
+    if func(given)==output:
+        return True
+    else:
+        return False
