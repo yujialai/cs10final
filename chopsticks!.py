@@ -127,7 +127,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     global opponentshand
     while True:
         choice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        if choice == "l" or choice = "r":
+        if choice == "l" or choice == "r":
             break
     if choice == "l":
         ownhand = 2
@@ -135,7 +135,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
         ownhand = 3
     while True:
         choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        if choice == "l" or choice = "r":
+        if choice == "l" or choice == "r":
             break
     if choice == "l":
         opponentshand = 0
