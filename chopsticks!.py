@@ -81,6 +81,7 @@ def handinposition():
     
 def beginguide(): #command.logo+instructions+level, ends with clear bg
     global level
+    global whoseturn
     t.bgpic("logo.gif")
     input("Chopsticks - Press enter to start")
     t.bgpic("instructions.gif") #instructions screen
@@ -91,6 +92,23 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
         if level == "h" or level =="m" or level == "e":
             break
     t.bgpic(level+".gif")
+    while True:
+        begin = input("Who should sart? Computer 'c', you 'y' or flip a coin 'f'")
+        if begin == "c" or begin == "y" or begin == "f":
+            break
+    if begin == "c":
+        whoseturn = "c"
+    elif begin == "y":
+        whoseturn = "y"
+    else:
+        t.bgpic("flipcoin.gif")
+        if random.randint(0,1) == 1:
+             print("You start!")
+             whoseturn = "y"
+        else:
+            print("Computer starts!")
+            whoseturn = "c"
+    time.sleep(1)
     t.clearscreen()
 
 def computerplay(): #big function contain other funcs.
@@ -171,7 +189,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         coice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if coice == "l" or choice == "r":
-        choice = input("Do you want to use your left 'l' or right 'r' hand? ")
+            choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
             break
     if choice == "l":
@@ -181,7 +199,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         coice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if coice == "l" or choice == "r":
-        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
+            choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if choice == "l" or choice == "r":
             break
     if choice == "l":
@@ -223,14 +241,14 @@ while game == True:
     while gameover(valueonhand) == False:
         while whoseturn == "c":
             computerplay()
-            finishturn()
             whoseturn == "y"
+        finishturn()
         if not gameover(valueonhand) == 0:
             break
         while whoseturn == "y":
             playerplay()
-            finishturn()
             whoseturn = "c"
+        finishturn()
         move += 1
         if not gameover(valueonhand) == 0:
             break
