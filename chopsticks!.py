@@ -45,6 +45,7 @@ valueonhand = [1, 1, 1, 1]#list contain finger numbers for each hands
 ownhand=0 #used in each turn choosing hands and adding hands. can be 0,1,2,3
 opponenthand=0 #same with above. can be 0,1,2,3
 movenottomake = []
+handlist = [[clhand, crhand, plhand, prhand], [cl, cr, pl, pr]]
     #whole game related
 move = 0 #steps you take to lose or win
 level = "" #difficulty level. can be equal to three different strings
@@ -273,19 +274,35 @@ def finishturn(): #updating the valueonhand + the UI hands VEDI
     global valueonhand
     global opponenthand
     global ownhand
+    global handlist
     def updatenumbers():
         global valueonhand
         global opponenthand
         global ownhand
+        global handlist
         valueonhand[opponenthand] = valueonhand[opponenthand] + valueonhand[ownhand]
         while valueonhand[opponenthand] > 5:
             valueonhand[opponenthand] -= 5
+        if valueonhand[opponenthand] == 5:
+            handlist[0][opponenthand].shape(eval(handlist[1][opponenthand]+"5")
     def updatehands(): 
         global valueonhand
-        clhand.shape(eval("cl"+str(valueonhand[0])))
-        crhand.shape(eval("cr"+str(valueonhand[1])))
-        plhand.shape(eval("pl"+str(valueonhand[2])))
-        prhand.shape(eval("pr"+str(valueonhand[3])))
+        if valueonhand[0] == 5:
+            clhand.shape(handoutshape)
+        else:
+            clhand.shape(eval("cl"+str(valueonhand[0])))
+        if valueonhand[1] == 5:
+            crhand.shape(handoutshape)
+        else:
+            crhand.shape(eval("cr"+str(valueonhand[1])))
+        if valueonhand[2] == 5:
+            plhand.shape(handoutshape)
+        else:
+            plhand.shape(eval("pl"+str(valueonhand[2])))
+        if valueonhand[3] == 5:
+            prhand.shape(handoutshape)
+        else:
+            prhand.shape(eval("cr"+str(valueonhand[3])))
     updatenumbers()
     updatehands()
 
