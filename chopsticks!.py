@@ -81,9 +81,9 @@ def handinposition():
 def beginguide(): #command.logo+instructions+level, ends with clear bg
     global level
     t.bgpic("logo.gif")
-    input("Chopsticks - Press any key to start")
+    input("Chopsticks - Press enter to start")
     t.bgpic("instructions.gif") #instructions screen
-    input("Instructions - Press any key to continue")
+    input("Instructions - Press enter to continue")
     t.bgpic("levels.gif")
     while True:
         level = str(input("What level do you wanna play? Type 'h' for hard, 'm' for medium and 'e' for easy: "))
