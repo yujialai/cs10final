@@ -95,9 +95,18 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
 def computerplay(): #big function contain other funcs. return???not sure yet
     return()
 
-def gameover(list):#input valueonhand, return true or false
+def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player wins
     return()
-    
+
+def finishup(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
+    if num == 0: #should be place all the way done outside the while loop
+        pass
+    elif num == 1:
+        #computer wins screen
+        #print in terminal
+        #ask to play again?
+        #close the window
+
 #-------------------end of functions---------------------
 
 #----------------------------GAME-----------------------------------
