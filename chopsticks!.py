@@ -140,7 +140,7 @@ def computerplay(): #big function contain other funcs.
         global opponenthand
         global valueonhand
         list = howtowincomputer(valueonhand)
-        if howtowincomputer() != []:
+        if howtowincomputer(valueonhand) != []:
             ownhand = list[0]
             #UI stuff
             opponenthand = list[1]
@@ -213,8 +213,9 @@ def computerplay(): #big function contain other funcs.
     def medium():
         global ownhand
         global opponenthand
-        list = howtowincomputer()
-        if howtowincomputer() != []:
+        global valueonhand
+        list = howtowincomputer(valueonhand)
+        if howtowincomputer(valueonhand) != []:
             ownhand = list[0]
             #UI stuff
             opponenthand = list[1]
@@ -260,9 +261,9 @@ def computerplay(): #big function contain other funcs.
     
 
 def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player wins JEAN
-    if list[0] == 0 and list[1] == 0:
+    if list[0] == 5 and list[1] == 5:
         return 2
-    elif list[2] == 0 and list[3] == 0:
+    elif list[2] == 5 and list[3] == 5:
         return 1
     else:
         return 0
@@ -334,6 +335,7 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
     global game
     if num == 2: #should be place all the way done outside the while loop
         # winningscreen():
+        t.clearscreen()
         t.bgpic("winnerscreen.gif")
         print("It took you " + str(move) + " to win. Good job!")
         choice = input("You wanna play again? Type 'Yes'!")
@@ -343,16 +345,14 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
             game = False
     elif num == 1:
         # losingscreen():
+        t.clearscreen()
+        t.bgpic("looserscreen.gif")
         print("You lost after " + str(move) + " moves. Too bad!")
         choice = input("You wanna play again? Type 'Yes'!")
         if choice == 'Yes':
             game = True
         else:
             game = False
-        #computer wins screen
-        #print in terminal
-        #ask to play again?
-        #close the window
 
 #-------------------end of functions---------------------
 
@@ -366,10 +366,8 @@ while game == True:
     while gameover(valueonhand) == False:
         if whoseturn == "c": #to make sure the hands are not updated before a move
             print("entering computer")
-            while whoseturn == "c":
-                print("computer while loop")
-                computerplay()
-                whoseturn == "y"
+            computerplay()
+            whoseturn = "y"
             print("finishing computer")
             finishturn()
         if not gameover(valueonhand) == 0:
