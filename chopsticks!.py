@@ -45,7 +45,6 @@ valueonhand = [1, 1, 1, 1]#list contain finger numbers for each hands
 ownhand=0 #used in each turn choosing hands and adding hands. can be 0,1,2,3
 opponentshand=0 #same with above. can be 0,1,2,3
 recentchoice=0
-movenottomake = []
     #whole game related
 move = 0 #steps you take to lose or win
 level = "" #difficulty level. can be equal to three different strings
@@ -133,10 +132,84 @@ def computerplay(): #big function contain other funcs.
             easy()
 
     def movenottomake(handvalue): #reportor.take in valueonhand
+    #building later with testing block    
+        return list #list.len can be up to 4.with possible1234
         
-        return list #list of move not to take
-        
+    def rhandavformove(num): #take in num rep. move to take, can be 1234
+        global valuesonhand #boolean.are hands available for move?
+        if num==1:
+            if valueonhand[0]==0 or valueonhand[2]==0:
+                return False
+            else:
+                return True
+        else:
+            if num==2:
+                if valueonhand[0]==0 or valueonhand[3]==0:
+                    return False
+                else:
+                    return True
+            else:
+                if num==3:
+                    if valueonhand[1]==0 or valueonhand[2]==0:
+                        return False
+                    else:
+                        return True
+                else:
+                    if num==4:
+                        if valueonhand[1]==0 or valueonhand[3]==0:
+                            return False
+                        else:
+                            return True
+    def domove (move):
+        global ownhand
+        global opponenthand
+        if move == 1:
+            ownhand = 0
+            opponenthand = 2
+        elif move == 2:
+            ownhand = 0
+            opponenthand = 3
+        elif move == 3:
+            ownhand = 1
+            opponenthand = 2
+        elif move == 4:
+            ownhand = 1
+            opponenthand = 3
 
+    
+
+    def hard():
+        global ownhand
+        global opponenthand
+        notmake=movenottomake(valueonhand)
+        a=0
+        finish = False
+        if not howtowincomputer(valueonhand)== []:
+            ownhand=howtowincomputer(valueonhand)[0]
+            #UI staff
+            opponenthand=howtowincomputer(valueonhand)[1]
+        elif len(movenottomake(valueonhand))==4:
+            easy()
+        else:
+            while finish == False:
+                a = random.randint(1,4)
+            while a in movenottomake:
+                a = random.randint(1,4)
+            if rhandavformove(a) == True:
+                domove(a)
+                finish = True
+            else:
+                movenottomake.append(a)
+                if len(movenottomake) == 4:
+                    easy()
+                    finish = True
+    #----actual code for cumputer play---
+    if level=="e":
+        easy()
+    elif level=="m":
+        medium()
+    else:
+        hard()
     
 
 def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player wins JEAN
@@ -171,7 +244,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         coice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if coice == "l" or choice == "r":
-        choice = input("Do you want to use your left 'l' or right 'r' hand? ")
+            choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
             break
     if choice == "l":
@@ -181,7 +254,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         coice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if coice == "l" or choice == "r":
-        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
+            choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if choice == "l" or choice == "r":
             break
     if choice == "l":
