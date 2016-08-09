@@ -117,6 +117,7 @@ def computerplay(): #big function contain other funcs.
     def easy(): #Changes own and opp hand. LAI
         global ownhand
         global valueonhand
+        global opponents_hand
         if valueonhand[0] == 5:
             ownhand = 1
         elif valueonhand[1] == 5:
@@ -124,7 +125,6 @@ def computerplay(): #big function contain other funcs.
         else:
             ownhand = random.randint(0,1)
         time.sleep(1)
-        global opponents_hand
         if valueonhand[2] == 5:
             opponenthand = 3
         elif valueonhand[3] == 5:
@@ -134,8 +134,8 @@ def computerplay(): #big function contain other funcs.
 
     def howtowincomputer(handvalue): #take in valueonhand,
         list = []         #return list of wining move[num for com hand, num pl hand]
-        for player in range(2,4):
-            for comp in range(0,2):
+        for player in range(2,3):
+            for comp in range(0,1):
                 if handvalue[player] + handvalue[comp] == 5:
                     list.append(int(comp))
                     list.append(int(player))
@@ -153,7 +153,8 @@ def computerplay(): #big function contain other funcs.
             easy()
 
     def movenottomake(handvalue): #reportor.take in valueonhand
-    #building later with testing block    
+        
+        #building later with testing block    
         return list #list.len can be up to 4.with possible1234
         
     def rhandavformove(num): #take in num rep. move to take, can be 1234
