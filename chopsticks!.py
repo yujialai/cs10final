@@ -102,6 +102,7 @@ def finishup(num): #command,input0/1/2 from gameover(),show w/l screen+print sco
     if num == 0: #should be place all the way done outside the while loop
         pass
     elif num == 1:
+        pass
         #computer wins screen
         #print in terminal
         #ask to play again?
