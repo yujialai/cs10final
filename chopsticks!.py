@@ -42,8 +42,8 @@ for items in Shapes_to_register:
     #hands related
 valueonhand = [1, 1, 1, 1]#list contain finger numbers for each hands
     #use when play
-ownhand = "" 
-opponentshand = "" 
+ownhand=0 #used in each turn choosing hands and adding hands. can be 0,1,2,3
+opponentshand=0 #same with above. can be 0,1,2,3
 recentchoice=0
 movenottomake = []
     #whole game related
