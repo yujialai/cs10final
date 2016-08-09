@@ -171,7 +171,7 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 
 beginguide()
 game = True
-while game = True:
+while game == True:
     handinposition()
     while gameover(valueonhand) == False:
         while whoseturn == "c":
