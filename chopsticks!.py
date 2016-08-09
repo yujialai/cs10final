@@ -92,14 +92,20 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
     t.bgpic(level+".gif")
     t.clearscreen()
 
-def computerplay(): #big function contain other funcs. return???not sure yet
+def computerplay(): #big function contain other funcs. Changes own and opp hand. LAI
     return()
 
-def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player wins
+def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player wins JEAN
     return()
 
-def finishup(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
-    if num == 0: #should be place all the way done outside the while loop
+def finishturn(): #updating the valueonhand + the UI hands VEDI
+    return ()
+
+def playerplay(): #choosehand with textinput and change global own and opp hand. JEAN
+    return ()
+
+def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
+    if num == 2: #should be place all the way done outside the while loop
         pass
     elif num == 1:
         pass
@@ -117,11 +123,19 @@ handinposition()
 while gameover(valueonhand) == False:
     while whoseturn == "c":
         computerplay()
+        finishturn()
         whoseturn == "y"
     if not gameover(valueonhand) == 0:
         break
     while whoseturn == "y":
-        pass
+        playerplay()
+        finishturn()
+        whoseturn = "c"
+    move += 1
+    if not gameover(valueonhand) == 0:
+        break
+finishgame(gameover(valueonhand))
+
         
 
 #-------------------------end of GAME----------------------------
