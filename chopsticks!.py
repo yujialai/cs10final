@@ -190,11 +190,8 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
-<<<<<<< Updated upstream
             choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
-=======
->>>>>>> Stashed changes
             break
     if choice == "l":
         ownhand = 2
@@ -203,25 +200,29 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if choice == "l" or choice == "r":
-<<<<<<< Updated upstream
             choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if choice == "l" or choice == "r":
-=======
->>>>>>> Stashed changes
             break
     if choice == "l":
         opponentshand = 0
     else:
         opponentshand = 1
+def s():
+    t.bgpic("looserscreen.gif")
+def s1():
+    t.bgpic("looserscreen2.gif")
+def s2():
+    t.bgpic("looserscreen3.gif")
+def s3():
+    t.bgpic("looserscreen4.gif")
+
 
 def losingscreen():
-    t.bgpic("looserscreen.gif")
-    time.sleep(.2)
-    t.bgpic("looserscreen2.gif")
-    time.sleep(.2)
-    t.bgpic("looserscreen3.gif")
-    time.sleep(.2)
-    t.bgpic("looserscreen4.gif")
+    t.ontimer(s, 0)
+    t.ontimer(s1, 900)
+    t.ontimer(s2, 1800)
+    t.ontimer(s3, 2700)
+    t.ontimer(s, 3600)
             
 def winningscreen():
     t.bgpic("winningscreen.gif")
@@ -243,7 +244,7 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
         else:
             game = False
     elif num == 1:
-        # losingscreen():
+        losingscreen():
         print("You lost after " + str(move) + " moves. Too bad!")
         choice = input("You wanna play again? Type 'Yes'!")
         if choice == 'Yes':
