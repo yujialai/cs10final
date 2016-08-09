@@ -92,8 +92,51 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
     t.bgpic(level+".gif")
     t.clearscreen()
 
-def computerplay(): #big function contain other funcs. Changes own and opp hand. LAI
-    return()
+def computerplay(): #big function contain other funcs.
+    def easy(): #Changes own and opp hand. LAI
+        global ownhand
+        global valueonhand
+        if valueonhand[0] == 0:
+            ownhand = 1
+        elif valuesonhand[1] == 2:
+            ownhand = 0
+        else:
+            ownhand = random.randint(0,1)
+        time.sleep(1)
+        global opponents_hand
+        if valueonhand[2] == 0:
+            opponenthand = 3
+        elif valueonhand[3] == 0:
+            opponenthand = 2
+        else:
+            opponenthand = random.randint(2,3)
+
+    def howtowincomputer(handvalue): #take in valueonhand,
+        list = []         #return list of wining move[num for com hand, num pl hand]
+        for player in range(2,4):
+            for comp in range(0,2):
+                if handvalue[player] + handvalue[comp] == 5:
+                    list.append(int(comp))
+                    list.append(int(player))
+        return list
+
+    def medium():
+        global ownhand
+        global opponentshand
+        list = howtowincomputer(valueonhand)
+        if howtowincomputer() != []:
+            ownhand = list[0]
+            #UI stuff
+            opponentshand = list[1]
+        else:
+            easy()
+
+    def movenottomake(handvalue): #reportor.take in valueonhand
+        
+        return list #list of move not to take
+        
+
+    
 
 def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player wins JEAN
     if list[0] == 0 and list[1] == 0:
@@ -111,7 +154,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     global opponentshand
     while True:
         coice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        if coice == "l" or choice = "r":
+        if coice == "l" or choice == "r":
             break
         if coice == "l":
             ownhand = 2
@@ -119,7 +162,7 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
             ownhand = 3
     while True:
         coice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        if coice == "l" or choice = "r":
+        if coice == "l" or choice == "r":
             break
         if choice == "l":
             opponentshand = 0
