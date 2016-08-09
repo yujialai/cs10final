@@ -65,6 +65,7 @@ def showhand():#command.hide all four hands turtles
     return()
 
 def handinposition():
+    valueonhand = [1, 1, 1, 1]
     clhand.penup()
     crhand.penup()
     prhand.penup()
@@ -142,10 +143,23 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
         opponentshand = 1
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
+    global game
     if num == 2: #should be place all the way done outside the while loop
-        t.bgpic("logo.gif")
+        t.bgpic("winnerscreen.gif")
+        print("It took you " + str(move) + " to win. Good job!")
+        choice = input("You wanna play again? Type 'Yes'!")
+        if choice == 'Yes':
+            game = True
+        else:
+            game = False
     elif num == 1:
-        pass
+        t.bgpic("looserscreen.gif")
+        print("You lost after " + str(move) + " moves. Too bad!")
+        choice = input("You wanna play again? Type 'Yes'!")
+        if choice == 'Yes':
+            game = True
+        else:
+            game = False
         #computer wins screen
         #print in terminal
         #ask to play again?
@@ -156,23 +170,25 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 #----------------------------GAME-----------------------------------
 
 beginguide()
-handinposition()
-while gameover(valueonhand) == False:
-    while whoseturn == "c":
-        computerplay()
-        finishturn()
-        whoseturn == "y"
-    if not gameover(valueonhand) == 0:
-        break
-    while whoseturn == "y":
-        playerplay()
-        finishturn()
-        whoseturn = "c"
-    move += 1
-    if not gameover(valueonhand) == 0:
-        break
-finishgame(gameover(valueonhand))
-
+game = True
+while game = True:
+    handinposition()
+    while gameover(valueonhand) == False:
+        while whoseturn == "c":
+            computerplay()
+            finishturn()
+            whoseturn == "y"
+        if not gameover(valueonhand) == 0:
+            break
+        while whoseturn == "y":
+            playerplay()
+            finishturn()
+            whoseturn = "c"
+        move += 1
+        if not gameover(valueonhand) == 0:
+            break
+    finishgame(gameover(valueonhand))
+t.bye()
         
 
 #-------------------------end of GAME----------------------------
