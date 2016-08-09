@@ -43,10 +43,7 @@ for items in Shapes_to_register:
 valueonhand = [1, 1, 1, 1]#list contain finger numbers for each hands
     #use when play
 ownhand=0 #used in each turn choosing hands and adding hands. can be 0,1,2,3
-opponentshand=0 #same with above. can be 0,1,2,3
-recentchoice=0
-ownhand= 5 #used in each turn choosing hands and adding hands. can be 0,1,2,3
-opponentshand= 6 #same with above. can be 0,1,2,3
+opponenthand=0 #same with above. can be 0,1,2,3
 movenottomake = []
     #whole game related
 move = 0 #steps you take to lose or win
@@ -57,14 +54,7 @@ whowin="" #going to be used for demostratingh winning/losing screen
 
 #----------------------functions-------------------------
 
-def waituntilclick(): #holds screen still click. return x coordinate and y coordinate
-    return([x,y])
 
-def hidehand(): #command.hide all four hands turtles
-    return()
-
-def showhand():#command.hide all four hands turtles
-    return()
 
 def handinposition():
     valueonhand = [1, 1, 1, 1]
@@ -117,7 +107,7 @@ def computerplay(): #big function contain other funcs.
     def easy(): #Changes own and opp hand. LAI
         global ownhand
         global valueonhand
-        global opponents_hand
+        global opponenthand
         if valueonhand[0] == 5:
             ownhand = 1
         elif valueonhand[1] == 5:
@@ -143,22 +133,38 @@ def computerplay(): #big function contain other funcs.
 
     def medium():
         global ownhand
-        global opponentshand
+        global opponenthand
         list = howtowincomputer(valueonhand)
         if howtowincomputer() != []:
             ownhand = list[0]
             #UI stuff
-            opponentshand = list[1]
+            opponenthand = list[1]
         else:
             easy()
 
     def movenottomake(handvalue): #reportor.take in valueonhand
-        
-        #building later with testing block    
-        return list #list.len can be up to 4.with possible1234
+        global movenottomake
+        resultsofpossiblemoves = []
+        playershand = []
+        result = []
+        for comp in range(0,2):
+            for player in range(2,4):
+                if handvalue[player] + handvalue[comp] > 5:
+                    resultsofpossiblemoves.append(handvalue[player] + handvalue[comp] -5)
+                else:
+                    resultsofpossiblemoves.append(handvalue[player] + handvalue[comp])   
+        for player in range(0,2):
+            playershand.append(handvalue[player])
+        for player in range(0,2):
+            for possibilities in range(0,4):
+                if playershand[player] + resultsofpossiblemoves[possibilities] == 5:
+                    if not result.contains(possibilities):
+                        result.append(possibilities)
+        movenottomake = result
+
         
     def rhandavformove(num): #take in num rep. move to take, can be 1234
-        global valuesonhand #boolean.are hands available for move?
+        global valueonhand #boolean.are hands available for move?
         if num==1:
             if valueonhand[0]==0 or valueonhand[2]==0:
                 return False
@@ -198,34 +204,45 @@ def computerplay(): #big function contain other funcs.
             ownhand = 1
             opponenthand = 3
 
-    
 
-    def hard():
+    def medium():
         global ownhand
         global opponenthand
-        notmake=movenottomake(valueonhand)
-        a=0
+        list = howtowincomputer()
+        if howtowincomputer() != []:
+            ownhand = list[0]
+            #UI stuff
+            opponenthand = list[1]
+        else:
+            easy()    
+
+    def hard():
+        global movenottomake
+        global ownhand
+        global opponenthand
+        movenottomake()
+        a = 0
         finish = False
-        if not howtowincomputer(valueonhand)== []:
-            ownhand=howtowincomputer(valueonhand)[0]
-            #UI staff
-            opponenthand=howtowincomputer(valueonhand)[1]
-        elif len(movenottomake(valueonhand))==4:
+        if not howtowincomputer() == []:
+            ownhand = howtowincomputer()[0]
+            #UI stuff
+            opponenthand = howtowincomputer()[1]
+        elif len(movenottomake) == 4:
             easy()
         else:
-            while finish == False:
+            while finish == False :
                 a = random.randint(1,4)
-            while a in movenottomake:
-                a = random.randint(1,4)
-            if rhandavformove(a) == True:
-                domove(a)
-                finish = True
-            else:
-                movenottomake.append(a)
-                if len(movenottomake) == 4:
-                    easy()
+                while a in movenottomake:
+                    a = random.randint(1,4)
+                if rhandavformove(a) == True:
+                    domove(a)
                     finish = True
-    #----actual code for cumputer play---
+                    # the finish variable stops the while block
+                else:
+                    movesnottomake.append(a)
+                    if len(movesnottomake) == 4:
+                        easy()
+                        finish = True
     if level=="e":
         easy()
     elif level=="m":
@@ -244,26 +261,30 @@ def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player
 
 
 def finishturn(): #updating the valueonhand + the UI hands VEDI
+    global valueonhand
+    global opponenthand
+    global ownhand
     def updatenumbers():
         global valueonhand
-        global opponentshand
+        global opponenthand
         global ownhand
-        valueonhand[opponentshand] = valueonhand[opponentshand] + valueonhand[ownhand]
-        while valueonhand[opponentshand] > 5:
-            valueonhand[opponentshand] -= 5
+        valueonhand[opponenthand] = valueonhand[opponenthand] + valueonhand[ownhand]
+        while valueonhand[opponenthand] > 5:
+            valueonhand[opponenthand] -= 5
     def updatehands(): 
-        global valuesonhand
+        global valueonhand
         clhand.shape(eval("cl"+str(valueonhand[0])))
         crhand.shape(eval("cr"+str(valueonhand[1])))
         plhand.shape(eval("pl"+str(valueonhand[2])))
         prhand.shape(eval("pr"+str(valueonhand[3])))
     updatenumbers()
     updatehands()
+
     
 
 def playerplay(): #choosehand with textinput and change global own and opp hand. JEAN
     global ownhand
-    global opponentshand
+    global opponenthand
     while True:
         choice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if choice == "l" or choice == "r":
@@ -277,9 +298,9 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
         if choice == "l" or choice == "r":
             break
     if choice == "l":
-        opponentshand = 0
+        opponenthand = 0
     else:
-        opponentshand = 1
+        opponenthand = 1
 
 def losingscreen():
     t.bgpic("looserscreen.gif")
@@ -326,21 +347,29 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 
 #----------------------------GAME-----------------------------------
 
+
 beginguide()
 game = True
 while game == True:
     handinposition()
     while gameover(valueonhand) == False:
-        while whoseturn == "c":
-            computerplay()
-            whoseturn == "y"
+        if whoseturn == "c": #to make sure the hands are not updated before a move
+            print("entering computer")
+            while whoseturn == "c":
+                print("computer while loop")
+                computerplay()
+                whoseturn == "y"
+            print("finishing computer")
             finishturn()
         if not gameover(valueonhand) == 0:
             break
+        print("entering player")
         while whoseturn == "y":
+            print("player while loop")
             playerplay()
             whoseturn = "c"
-            finishturn()
+        print("finishing player")
+        finishturn()
         move += 1
         if not gameover(valueonhand) == 0:
             break
