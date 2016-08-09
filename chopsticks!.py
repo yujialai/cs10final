@@ -96,13 +96,35 @@ def computerplay(): #big function contain other funcs. Changes own and opp hand.
     return()
 
 def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player wins JEAN
-    return()
+    if list[0] == 0 and list[1] == 0:
+        return 2
+    elif list[2] == 0 and list[3] == 0:
+        return 1
+    else:
+        return 0
 
 def finishturn(): #updating the valueonhand + the UI hands VEDI
     return ()
 
 def playerplay(): #choosehand with textinput and change global own and opp hand. JEAN
-    return ()
+    global ownhand
+    global opponentshand
+    while True:
+        coice = input("Do you want to use your left 'l' or right 'r' hand? ")
+        if coice == "l" or choice = "r":
+            break
+        if coice == "l":
+            ownhand = 2
+        else:
+            ownhand = 3
+    while True:
+        coice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
+        if coice == "l" or choice = "r":
+            break
+        if choice == "l":
+            opponentshand = 0
+        else:
+            opponentshand = 1
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
     if num == 2: #should be place all the way done outside the while loop
