@@ -215,11 +215,11 @@ def computerplay(): #big function contain other funcs.
         global ownhand
         global opponenthand
         global valueonhand
-        list = howtowincomputer(valueonhand)
-        if howtowincomputer(valueonhand) != []:
-            ownhand = list[0]
+        listtowin = howtowincomputer(valueonhand)
+        if listtowin != []:
+            ownhand = listtowin[0]
             #UI stuff
-            opponenthand = list[1]
+            opponenthand = listtowin[1]
         else:
             easy()    
 
@@ -231,10 +231,11 @@ def computerplay(): #big function contain other funcs.
         createmovenottomake(valueonhand)
         a = 0
         finish = False
-        if not howtowincomputer(valueonhand) == []:
-            ownhand = howtowincomputer()[0]
+        listtowin = howtowincomputer(valueonhand)
+        if listtowin !=[]:
+            ownhand = listtowin[0]
             #UI stuff
-            opponenthand = howtowincomputer()[1]
+            opponenthand = listtowin[1]
         elif len(movenottomake) == 4:
             easy()
         else:
@@ -248,8 +249,8 @@ def computerplay(): #big function contain other funcs.
                     finish = True
                     # the finish variable stops the while block
                 else:
-                    movesnottomake.append(a)
-                    if len(movesnottomake) == 4:
+                    movenottomake.append(a)
+                    if len(movenottomake) == 4:
                         easy()
                         finish = True
     if level=="e":
