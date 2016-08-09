@@ -125,25 +125,25 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     global ownhand
     global opponentshand
     while True:
-        coice = input("Do you want to use your left 'l' or right 'r' hand? ")
-        if coice == "l" or choice = "r":
+        choice = input("Do you want to use your left 'l' or right 'r' hand? ")
+        if choice == "l" or choice = "r":
             break
-        if coice == "l":
-            ownhand = 2
-        else:
-            ownhand = 3
+    if choice == "l":
+        ownhand = 2
+    else:
+        ownhand = 3
     while True:
-        coice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
-        if coice == "l" or choice = "r":
+        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
+        if choice == "l" or choice = "r":
             break
-        if choice == "l":
-            opponentshand = 0
-        else:
-            opponentshand = 1
+    if choice == "l":
+        opponentshand = 0
+    else:
+        opponentshand = 1
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
     if num == 2: #should be place all the way done outside the while loop
-        pass
+        t.bgpic("logo.gif")
     elif num == 1:
         pass
         #computer wins screen
