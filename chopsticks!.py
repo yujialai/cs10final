@@ -65,6 +65,7 @@ def showhand():#command.hide all four hands turtles
     return()
 
 def handinposition():
+    valueonhand = [1, 1, 1, 1]
     clhand.penup()
     crhand.penup()
     prhand.penup()
@@ -147,7 +148,22 @@ def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player
         return 0
 
 def finishturn(): #updating the valueonhand + the UI hands VEDI
-    return ()
+    def updatenumbers():
+        global valueonhand
+        global opponentshand
+        global ownhand
+        valueonhand[opponentshand] = valueonhand[opponentshand] + valueonhand[ownhand]
+        while valueonhand[opponentshand] > 5:
+            valueonhand[opponentshand] -= 5
+    def updatehands(): 
+        global valuesonhand
+        clhand.shape(eval("cl"+str(valueonhand[0])))
+        crhand.shape(eval("cr"+str(valueonhand[1])))
+        plhand.shape(eval("pl"+str(valueonhand[2])))
+        prhand.shape(eval("pr"+str(valueonhand[3])))
+    updatenumbers()
+    updatehands()
+    
 
 def playerplay(): #choosehand with textinput and change global own and opp hand. JEAN
     global ownhand
@@ -155,25 +171,42 @@ def playerplay(): #choosehand with textinput and change global own and opp hand.
     while True:
         coice = input("Do you want to use your left 'l' or right 'r' hand? ")
         if coice == "l" or choice == "r":
+        choice = input("Do you want to use your left 'l' or right 'r' hand? ")
+        if choice == "l" or choice == "r":
             break
-        if coice == "l":
-            ownhand = 2
-        else:
-            ownhand = 3
+    if choice == "l":
+        ownhand = 2
+    else:
+        ownhand = 3
     while True:
         coice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
         if coice == "l" or choice == "r":
+        choice = input("Do you want to increase the opponents 'l' or 'r' hand? (your perspective) ")
+        if choice == "l" or choice == "r":
             break
-        if choice == "l":
-            opponentshand = 0
-        else:
-            opponentshand = 1
+    if choice == "l":
+        opponentshand = 0
+    else:
+        opponentshand = 1
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
+    global game
     if num == 2: #should be place all the way done outside the while loop
-        pass
+        t.bgpic("winnerscreen.gif")
+        print("It took you " + str(move) + " to win. Good job!")
+        choice = input("You wanna play again? Type 'Yes'!")
+        if choice == 'Yes':
+            game = True
+        else:
+            game = False
     elif num == 1:
-        pass
+        t.bgpic("looserscreen.gif")
+        print("You lost after " + str(move) + " moves. Too bad!")
+        choice = input("You wanna play again? Type 'Yes'!")
+        if choice == 'Yes':
+            game = True
+        else:
+            game = False
         #computer wins screen
         #print in terminal
         #ask to play again?
@@ -184,23 +217,25 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 #----------------------------GAME-----------------------------------
 
 beginguide()
-handinposition()
-while gameover(valueonhand) == False:
-    while whoseturn == "c":
-        computerplay()
-        finishturn()
-        whoseturn == "y"
-    if not gameover(valueonhand) == 0:
-        break
-    while whoseturn == "y":
-        playerplay()
-        finishturn()
-        whoseturn = "c"
-    move += 1
-    if not gameover(valueonhand) == 0:
-        break
-finishgame(gameover(valueonhand))
-
+game = True
+while game == True:
+    handinposition()
+    while gameover(valueonhand) == False:
+        while whoseturn == "c":
+            computerplay()
+            finishturn()
+            whoseturn == "y"
+        if not gameover(valueonhand) == 0:
+            break
+        while whoseturn == "y":
+            playerplay()
+            finishturn()
+            whoseturn = "c"
+        move += 1
+        if not gameover(valueonhand) == 0:
+            break
+    finishgame(gameover(valueonhand))
+t.bye()
         
 
 #-------------------------end of GAME----------------------------
