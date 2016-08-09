@@ -2,7 +2,7 @@ import turtle as t
 import random
 import time
 
-t.setup(width=480, height=360, startx=50, starty=50)
+t.setup(width=480, height=360, startx=400, starty=50)
 
 #initializing the sprites and numbers
 clhand = t.Turtle()
@@ -79,7 +79,18 @@ def handinposition():
     prhand.shape(pr1)
     
 def beginguide(): #command.logo+instructions+level, ends with clear bg
-    return()
+    global level
+    t.bgpic("logo.gif")
+    input("Chopsticks - Press any key to start")
+    t.bgpic("instructions.gif") #instructions screen
+    input("Instructions - Press any key to continue")
+    t.bgpic("levels.gif")
+    while True:
+        level = str(input("What level do you wanna play? Type 'h' for hard, 'm' for medium and 'e' for easy: "))
+        if level == "h" or level =="m" or level == "e":
+            break
+    t.bgpic(level+".gif")
+    t.clearscreen()
 
 def computerplay(): #big function contain other funcs. return???not sure yet
     return()
@@ -97,6 +108,10 @@ while gameover(valueonhand) == False:
     while whoseturn == "c":
         computerplay()
         whoseturn == "y"
+    if not gameover(valueonhand) == 0:
+        break
+    while whoseturn == "y":
+        pass
         
 
 #-------------------------end of GAME----------------------------
