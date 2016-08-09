@@ -78,12 +78,26 @@ def handinposition():
     plhand.shape(pl1)
     prhand.shape(pr1)
     
-    
+def beginguide(): #command.logo+instructions+level, ends with clear bg
+    return()
 
+def computerplay(): #big function contain other funcs. return???not sure yet
+    return()
+
+def gameover(list):#input valueonhand, return true or false
+    return()
+    
 #-------------------end of functions---------------------
 
 #----------------------------GAME-----------------------------------
 
+beginguide()
+handinposition()
+while gameover(valueonhand) == False:
+    while whoseturn == "c":
+        computerplay()
+        whoseturn == "y"
+        
 
 #-------------------------end of GAME----------------------------
 
