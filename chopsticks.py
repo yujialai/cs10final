@@ -6,7 +6,7 @@ import time
 #Sets up the window.
 t.setup(width=480, height=360, startx=400, starty=50)
 
-#Initializing the sprites and numbers
+#Initializing the turtles(stand for hands with shapes) and numbers on hands(you always start with ones)
 clhand = t.Turtle()
 crhand = t.Turtle()
 prhand = t.Turtle()
@@ -37,18 +37,18 @@ cl5 = "5Cl.gif"
 cr5 = "5Cr.gif"
 handoutshape = "handoutshape.gif"
 Shapes_to_register = [pl1, pl2, pl3, pl4, pl5, pr1, pr2, pr3, pr4, pr5, cl1, cl2, cl3, cl4, cl5, cr1, cr2, cr3, cr4, cr5, handoutshape]
-for items in Shapes_to_register:
+for items in Shapes_to_register: #using for loop to register so we don't have to ty
     t.register_shape(items)
 
 #---------------setting gloabal variables-------------------
-    #hands related
+    #hands related#
 valueonhand = [1, 1, 1, 1]#list contain finger numbers for each hands
-    #use when play
+    #use when play#
 ownhand=0 #used in each turn choosing hands and adding hands. can be 0,1,2,3
 opponenthand=0 #same with above. can be 0,1,2,3
-movenottomake = []
+movenottomake = [] #list used in hard mode, results of predictions for if taking a move can potntially cause the computer to lose in the next round
 handlist = [[clhand, crhand, plhand, prhand], ["cl", "cr", "pl", "pr"]]
-    #whole game related
+    #whole game related#
 move = 0 #steps you take to lose or win
 level = "" #difficulty level. can be equal to three different strings
 whoseturn= "" #used for big while loops. can be equal to two different strings
@@ -56,10 +56,7 @@ whowin="" #going to be used for demostratingh winning/losing screen
 #---------------end of setting global variables-------------
 
 #----------------------functions-------------------------
-
-
-
-def handinposition():
+def handinposition(): #set turtles into "hands" and set them to the right positions
 	global move
 	global valueonhand
 	valueonhand = [1, 1, 1, 1]
@@ -81,7 +78,7 @@ def handinposition():
 	prhand.shape(pr1)
 	move = 0
 
-def beginguide(): #command.logo+instructions+level, ends with clear bg
+def beginguide(): #command.logo+instructions+level, ends with clear background
     global level
     global whoseturn
     t.bgpic("logo.gif")
@@ -95,7 +92,7 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
             break
     t.bgpic(level+".gif")
     while True:
-        begin = input("Who should sart? Computer 'c', you 'y' or flip a coin 'f'")
+        begin = input("Who should start? Computer 'c', you 'y' or flip a coin 'f'")
         if begin == "c" or begin == "y" or begin == "f":
             break
     if begin == "c":
@@ -114,7 +111,7 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
     t.bgpic("clearscreen.gif")
 
 
-def easy(): #Changes own and opp hand. LAI
+def easy(): #Changes own and opponent's hands randomly, computer has no skills in this mode exept not picking a hand that is already out.
     global ownhand
     global valueonhand
     global opponenthand
@@ -132,8 +129,8 @@ def easy(): #Changes own and opp hand. LAI
     else:
         opponenthand = random.randint(2,3)
 
-def howtowincomputer(handvalue): #take in valueonhand,
-    liste = []         #return list of wining move[num for com hand, num pl hand]
+def howtowincomputer(handvalue): #take in valueonhand(),
+    liste = []  #return list of moves that will make the computer win in this round[num for com hand, num pl hand]
     for player in range(2,4):
         for comp in range(0,2):
             if handvalue[player] + handvalue[comp] == 5:
@@ -141,21 +138,9 @@ def howtowincomputer(handvalue): #take in valueonhand,
                 liste.append(int(player))
     return liste
 
-def medium():
-    global ownhand
-    global opponenthand
-    global valueonhand
-    list = howtowincomputer(valueonhand)
-    if howtowincomputer(valueonhand) != []:
-        ownhand = list[0]
-        #UI stuff
-        opponenthand = list[1]
-    else:
-        easy()
-
-def createmovenottomake(handvalue): #reporter.take in valueonhand
-    global movenottomake
-    resultsofpossiblemoves = []
+def createmovenottomake(handvalue): #reporter.take in valueonhand(global list of numbers on four hands)
+    global movenottomake #generate a list of moves that can cause the computer to lose in the next round
+    resultsofpossiblemoves = []#list of values of player's hands possible values, and then we use this to test if the player can use those numbers to win.
     computerhand = []
     result = []
     for comp in range(0,2):
@@ -175,8 +160,8 @@ def createmovenottomake(handvalue): #reporter.take in valueonhand
 
 
         
-def rhandavformove(num): #take in num rep. move to take, can be 1234
-    global valueonhand #boolean.are hands available for move?
+def rhandavformove(num): #take in a number represents move to take, can be 1234
+    global valueonhand #boolean."are hands available for move?"
     if num==1:
         if valueonhand[0]==5 or valueonhand[2]==5:
             return False
@@ -217,8 +202,7 @@ def domove (move): #sets ownhand and opponenthand
         ownhand = 1
         opponenthand = 3
 
-
-def medium():
+def medium(): #computer has a new skill of seeing the moves that can make him win
     global ownhand
     global opponenthand
     global valueonhand
@@ -227,9 +211,9 @@ def medium():
         ownhand = listtowin[0]
         opponenthand = listtowin[1]
     else:
-        easy()    
+        easy()#if computer doesn't see moves for him to win in this round, he picks a random move just like in easy mode
 
-def hard():
+def hard(): #on top of medium, computer now can predict whether a move can give the player a chance to win in the next round. and he won't do that move
     global movenottomake
     global ownhand
     global opponenthand
@@ -259,7 +243,7 @@ def hard():
                     easy()
                     finish = True
 
-def computerplay(): #HOF contains other funcs.
+def computerplay(): #HOF contains other funcs. ABSTRACTION! SO CLEAN AND READABLE
     global ownhand
     global valueonhand
     global opponenthand
@@ -280,7 +264,7 @@ def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player
         return 0
 
 
-def finishturn(): #updating the valueonhand
+def finishturn(): #updating the valueonhand, also display handout is hand reaches 5
     global valueonhand
     global opponenthand
     global ownhand
@@ -318,7 +302,7 @@ def finishturn(): #updating the valueonhand
 
     
 
-def playerplay():
+def playerplay(): #let the player choose which hand to use as augent, and which opponet's hand to use as addent
     global ownhand
     global opponenthand
     global valueonhand
@@ -352,7 +336,7 @@ def s3():
     t.bgpic("looserscreen4.gif")
 
 
-def losingscreen():
+def losingscreen(): #animation
     s()
     t.ontimer(s1, 100)
     t.ontimer(s2, 200)
@@ -371,7 +355,7 @@ def w2():
 def w3():
     t.bgpic("winnerscreen3.gif")
 
-def winningscreen():
+def winningscreen(): #animation
     w()
     t.ontimer(w2, 200)
     t.ontimer(w3, 400)
@@ -386,7 +370,7 @@ def hideturtle():
 	plhand.hideturtle()
 	prhand.hideturtle()
 
-def finishgame(num): 
+def finishgame(num): #after game, display win/lose screen and ask if want to play again
     global game
     global valueonhand
     if num == 2:
@@ -409,19 +393,17 @@ def finishgame(num):
             valueonhand = [1, 1, 1, 1]
         else:
             game = False
-
 #-------------------end of functions---------------------
 
 #----------------------------GAME-----------------------------------
-
-
+#this is the actual game play. with abstraction, it appears to be simple and human-read-friendly
 game = True
 while game == True:
-	beginguide() #gives instructions, pick level and who goes first
+	beginguide()
 	handinposition()
 	while gameover(valueonhand) == 0:
 		if whoseturn == "c":
-			time.sleep(2)
+			time.sleep(2)#so the player have time to understand computer's move
 			computerplay()
 			finishturn()
 			whoseturn = "y"
@@ -434,7 +416,6 @@ while game == True:
 		move += 1
 	finishgame(gameover(valueonhand))
 t.bye()
-
 #-------------------------end of GAME----------------------------
 
 
