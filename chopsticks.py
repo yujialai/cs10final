@@ -1,10 +1,12 @@
+#We are using the turtle library for graphics, the random to generate random moves and time to delay the computers move.
 import turtle as t
 import random
 import time
 
+#Sets up the window.
 t.setup(width=480, height=360, startx=400, starty=50)
 
-#initializing the sprites and numbers
+#Initializing the sprites and numbers
 clhand = t.Turtle()
 crhand = t.Turtle()
 prhand = t.Turtle()
@@ -244,7 +246,6 @@ def hard():
         easy()
     else:
         while finish == False :
-            print("Entering loop 1 in hard") #delete
             a = random.randint(1,4)
             while a in movenottomake:
                 a = random.randint(1,4)
@@ -258,12 +259,11 @@ def hard():
                     easy()
                     finish = True
 
-def computerplay(): #big function contain other funcs.
+def computerplay(): #HOF contains other funcs.
     global ownhand
     global valueonhand
     global opponenthand
     if level=="e":
-        print("entering easy") #delete
         easy()
     elif level=="m":
         medium()
@@ -280,7 +280,7 @@ def gameover(list):#input valueonhand, return 0:no one or 1:com wins or 2:player
         return 0
 
 
-def finishturn(): #updating the valueonhand + the UI hands VEDI
+def finishturn(): #updating the valueonhand
     global valueonhand
     global opponenthand
     global ownhand
@@ -318,7 +318,7 @@ def finishturn(): #updating the valueonhand + the UI hands VEDI
 
     
 
-def playerplay(): #choosehand with textinput and change global own and opp hand. JEAN
+def playerplay():
     global ownhand
     global opponenthand
     global valueonhand
@@ -386,7 +386,7 @@ def hideturtle():
 	plhand.hideturtle()
 	prhand.hideturtle()
 
-def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
+def finishgame(num): 
     global game
     global valueonhand
     if num == 2:
@@ -418,7 +418,7 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 game = True
 while game == True:
 	beginguide() #gives instructions, pick level and who goes first
-	handinposition() #gets hands in position
+	handinposition()
 	while gameover(valueonhand) == 0:
 		if whoseturn == "c":
 			time.sleep(2)
@@ -427,12 +427,9 @@ while game == True:
 			whoseturn = "y"
 		if not gameover(valueonhand) == 0:
 			break
-		print("entering player") #delete
 		while whoseturn == "y":
-			print("player while loop") #delete
 			playerplay()
 			whoseturn = "c"
-		print("finishing player") #delete
 		finishturn()
 		move += 1
 	finishgame(gameover(valueonhand))
