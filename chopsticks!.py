@@ -59,30 +59,26 @@ whowin="" #going to be used for demostratingh winning/losing screen
 
 def handinposition():
 	global move
-    valueonhand = [1, 1, 1, 1]
-    clhand.penup()
-    crhand.penup()
-    prhand.penup()
-    plhand.penup()
-    clhand.setposition(-120,80)
-    crhand.setposition(120,80)
-    plhand.setposition(-120,-80)
-    prhand.setposition(120,-80)
-    clhand.shape(cl1)
-    crhand.shape(cr1)
-    plhand.shape(pl1)
-    prhand.shape(pr1)
-<<<<<<< HEAD
-    clhand.showturtle()
-    crhand.showturtle()
-    plhand.showturtle()
-    prhand.showturtle()
-    move = 0
-=======
+	global valueonhand
+	valueonhand = [1, 1, 1, 1]
+	clhand.penup()
+	crhand.penup()
+	prhand.penup()
+	plhand.penup()
+	clhand.setposition(-120,80)
+	crhand.setposition(120,80)
+	plhand.setposition(-120,-80)
+	prhand.setposition(120,-80)
+	clhand.showturtle()
+	crhand.showturtle()
+	plhand.showturtle()
+	prhand.showturtle()
+	clhand.shape(cl1)
+	crhand.shape(cr1)
+	plhand.shape(pl1)
+	prhand.shape(pr1)
+	move = 0
 
-
->>>>>>> origin/master
-    
 def beginguide(): #command.logo+instructions+level, ends with clear bg
     global level
     global whoseturn
@@ -394,8 +390,6 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
     if num == 2: #should be place all the way done outside the while loop
         t.clearscreen()
         winningscreen()
-        # t.clearscreen()
-        # t.bgpic("winnerscreen.gif")
         print("It took you " + str(move) + " to win. Good job!")
         choice = input("You wanna play again? Type 'Yes'!")
         if choice == 'Yes':
@@ -421,8 +415,8 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 
 game = True
 while game == True:
-	beginguide()
-	handinposition()
+	beginguide() #gives instructions, pick level and who goes first
+	handinposition() #gets hands in position
 	while gameover(valueonhand) == 0:
 		if whoseturn == "c":
 			time.sleep(2)
@@ -439,9 +433,7 @@ while game == True:
 		print("finishing player") #delete
 		finishturn()
 		move += 1
-		if not gameover(valueonhand) == 0:
-			break
-		finishgame(gameover(valueonhand))
+	finishgame(gameover(valueonhand))
 t.bye()
 
 #-------------------------end of GAME----------------------------
