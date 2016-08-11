@@ -33,8 +33,9 @@ pl5 = "5Pl.gif"
 pr5 = "5Pr.gif"
 cl5 = "5Cl.gif"
 cr5 = "5Cr.gif"
+none = "clearscreen.gif"
 handoutshape = "handoutshape.gif"
-Shapes_to_register = [pl1, pl2, pl3, pl4, pl5, pr1, pr2, pr3, pr4, pr5, cl1, cl2, cl3, cl4, cl5, cr1, cr2, cr3, cr4, cr5, handoutshape]
+Shapes_to_register = [pl1, pl2, pl3, pl4, pl5, pr1, pr2, pr3, pr4, pr5, cl1, cl2, cl3, cl4, cl5, cr1, cr2, cr3, cr4, cr5, handoutshape, none]
 for items in Shapes_to_register:
     t.register_shape(items)
 
@@ -217,7 +218,7 @@ def medium():
         #UI stuff
         opponenthand = listtowin[1]
     else:
-        easy()    
+        easy()
 
 def hard():
     global movenottomake
@@ -376,6 +377,11 @@ def winningscreen():
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
     global game
     global valueonhand
+    #hide hands
+    clhand.hideturtle()
+    crhand.hideturtle()
+    plhand.hideturtle()
+    prhand.hideturtle()
     if num == 2: #should be place all the way done outside the while loop
         t.clearscreen()
         winningscreen()
@@ -425,7 +431,7 @@ while game == True:
 		move += 1
 		if not gameover(valueonhand) == 0:
 			break
-		finishgame(gameover(valueonhand))
+	finishgame(gameover(valueonhand))
 t.bye()
 
 #-------------------------end of GAME----------------------------
