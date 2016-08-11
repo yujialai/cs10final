@@ -170,9 +170,7 @@ def createmovenottomake(handvalue): #reporter.take in valueonhand
                 if not possibilities+1 in result:
                     result.append(possibilities+1)
     movenottomake = result
-    print(resultsofpossiblemoves)
-    print(movenottomake)
-    print(computerhand)
+
 
         
 def rhandavformove(num): #take in num rep. move to take, can be 1234
