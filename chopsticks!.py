@@ -72,6 +72,8 @@ def handinposition():
     crhand.shape(cr1)
     plhand.shape(pl1)
     prhand.shape(pr1)
+
+
     
 def beginguide(): #command.logo+instructions+level, ends with clear bg
     global level
