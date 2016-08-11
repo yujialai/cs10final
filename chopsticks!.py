@@ -163,7 +163,6 @@ def createmovenottomake(handvalue): #reporter.take in valueonhand
                 if not possibilities in result:
                     result.append(possibilities)
     movenottomake = result
-    return movenottomake
 
         
 def rhandavformove(num): #take in num rep. move to take, can be 1234
@@ -237,7 +236,7 @@ def hard():
         easy()
     else:
         while finish == False :
-            print("Entering loop 1 in hard")
+            print("Entering loop 1 in hard") #delete
             a = random.randint(1,4)
             while a in movenottomake:
                 a = random.randint(1,4)
@@ -256,7 +255,7 @@ def computerplay(): #big function contain other funcs.
     global valueonhand
     global opponenthand
     if level=="e":
-        print("entering easy")
+        print("entering easy") #delete
         easy()
     elif level=="m":
         medium()
@@ -356,6 +355,7 @@ def losingscreen():
     t.ontimer(s3, 700)
     t.ontimer(s, 800)
             
+
 def w():
     t.bgpic("winnerscreen.gif")
 def w2():
@@ -370,6 +370,7 @@ def winningscreen():
     t.ontimer(w, 600)
     t.ontimer(w2, 800)
     t.ontimer(w3, 1000)
+
 
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
@@ -403,33 +404,29 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 #----------------------------GAME-----------------------------------
 
 
-
-beginguide()
 game = True
 while game == True:
-    handinposition()
-    while gameover(valueonhand) == False:
-        if whoseturn == "c": #to make sure the hands are not updated before a move
-            print("entering computer")
-            computerplay()
-            whoseturn = "y"
-            print("finishing computer")
-            finishturn()
-        if not gameover(valueonhand) == 0:
-            break
-        print("entering player")
-        while whoseturn == "y":
-            print("player while loop")
-            playerplay()
-            whoseturn = "c"
-        print("finishing player")
-        finishturn()
-        move += 1
-        if not gameover(valueonhand) == 0:
-            break
-    finishgame(gameover(valueonhand))
+	beginguide()
+	handinposition()
+	while gameover(valueonhand) == 0:
+		if whoseturn == "c":
+			computerplay()
+			finishturn()
+			whoseturn = "y"
+		if not gameover(valueonhand) == 0:
+			break
+		print("entering player") #delete
+		while whoseturn == "y":
+			print("player while loop") #delete
+			playerplay()
+			whoseturn = "c"
+		print("finishing player") #delete
+		finishturn()
+		move += 1
+		if not gameover(valueonhand) == 0:
+			break
+		finishgame(gameover(valueonhand))
 t.bye()
-        
 
 #-------------------------end of GAME----------------------------
 
