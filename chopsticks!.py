@@ -104,155 +104,157 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
         time.sleep(1)
     t.clearscreen()
 
-def computerplay(): #big function contain other funcs.
+
+def easy(): #Changes own and opp hand. LAI
     global ownhand
     global valueonhand
     global opponenthand
+    if valueonhand[0] == 5:
+        ownhand = 1
+    elif valueonhand[1] == 5:
+        ownhand = 0
+    else:
+        ownhand = random.randint(0,1)
+    time.sleep(1)
+    if valueonhand[2] == 5:
+        opponenthand = 3
+    elif valueonhand[3] == 5:
+        opponenthand = 2
+    else:
+        opponenthand = random.randint(2,3)
 
-    def easy(): #Changes own and opp hand. LAI
-        global ownhand
-        global valueonhand
-        global opponenthand
-        if valueonhand[0] == 5:
-            ownhand = 1
-        elif valueonhand[1] == 5:
-            ownhand = 0
-        else:
-            ownhand = random.randint(0,1)
-        time.sleep(1)
-        if valueonhand[2] == 5:
-            opponenthand = 3
-        elif valueonhand[3] == 5:
-            opponenthand = 2
-        else:
-            opponenthand = random.randint(2,3)
-
-    def howtowincomputer(handvalue): #take in valueonhand,
-        list = []         #return list of wining move[num for com hand, num pl hand]
-        for player in range(2,3):
-            for comp in range(0,1):
-                if handvalue[player] + handvalue[comp] == 5:
-                    list.append(int(comp))
-                    list.append(int(player))
-        return list
-
-    def medium():
-        global ownhand
-        global opponenthand
-        global valueonhand
-        list = howtowincomputer(valueonhand)
-        if howtowincomputer(valueonhand) != []:
-            ownhand = list[0]
-            #UI stuff
-            opponenthand = list[1]
-        else:
-            easy()
-
-    def createmovenottomake(handvalue): #reporter.take in valueonhand
-        global movenottomake
-        resultsofpossiblemoves = []
-        playershand = []
-        result = []
+def howtowincomputer(handvalue): #take in valueonhand,
+    liste = []         #return list of wining move[num for com hand, num pl hand]
+    for player in range(2,4):
         for comp in range(0,2):
-            for player in range(2,4):
-                if handvalue[player] + handvalue[comp] > 5:
-                    resultsofpossiblemoves.append(handvalue[player] + handvalue[comp] -5)
-                else:
-                    resultsofpossiblemoves.append(handvalue[player] + handvalue[comp])   
-        for player in range(0,2):
-            playershand.append(handvalue[player])
-        for player in range(0,2):
-            for possibilities in range(0,4):
-                if playershand[player] + resultsofpossiblemoves[possibilities] == 5:
-                    if not possibilities in result:
-                        result.append(possibilities)
-        movenottomake = result
+            if handvalue[player] + handvalue[comp] == 5:
+                liste.append(int(comp))
+                liste.append(int(player))
+    return liste
+
+def medium():
+    global ownhand
+    global opponenthand
+    global valueonhand
+    list = howtowincomputer(valueonhand)
+    if howtowincomputer(valueonhand) != []:
+        ownhand = list[0]
+        #UI stuff
+        opponenthand = list[1]
+    else:
+        easy()
+
+def createmovenottomake(handvalue): #reporter.take in valueonhand
+    global movenottomake
+    resultsofpossiblemoves = []
+    playershand = []
+    result = []
+    for comp in range(0,2):
+        for player in range(2,4):
+            if handvalue[player] + handvalue[comp] > 5:
+                resultsofpossiblemoves.append(handvalue[player] + handvalue[comp] -5)
+            else:
+                resultsofpossiblemoves.append(handvalue[player] + handvalue[comp])   
+    for player in range(0,2):
+        playershand.append(handvalue[player])
+    for player in range(0,2):
+        for possibilities in range(0,4):
+            if playershand[player] + resultsofpossiblemoves[possibilities] == 5:
+                if not possibilities in result:
+                    result.append(possibilities)
+    movenottomake = result
+    return movenottomake
 
         
-    def rhandavformove(num): #take in num rep. move to take, can be 1234
-        global valueonhand #boolean.are hands available for move?
-        if num==1:
-            if valueonhand[0]==5 or valueonhand[2]==5:
+def rhandavformove(num): #take in num rep. move to take, can be 1234
+    global valueonhand #boolean.are hands available for move?
+    if num==1:
+        if valueonhand[0]==5 or valueonhand[2]==5:
+            return False
+        else:
+            return True
+    else:
+        if num==2:
+            if valueonhand[0]==5 or valueonhand[3]==5:
                 return False
             else:
                 return True
         else:
-            if num==2:
-                if valueonhand[0]==5 or valueonhand[3]==5:
+            if num==3:
+                if valueonhand[1]==5 or valueonhand[2]==5:
                     return False
                 else:
                     return True
             else:
-                if num==3:
-                    if valueonhand[1]==5 or valueonhand[2]==5:
+                if num==4:
+                    if valueonhand[1]==5 or valueonhand[3]==5:
                         return False
                     else:
                         return True
-                else:
-                    if num==4:
-                        if valueonhand[1]==5 or valueonhand[3]==5:
-                            return False
-                        else:
-                            return True
-    def domove (move):
-        global ownhand
-        global opponenthand
-        if move == 1:
-            ownhand = 0
-            opponenthand = 2
-        elif move == 2:
-            ownhand = 0
-            opponenthand = 3
-        elif move == 3:
-            ownhand = 1
-            opponenthand = 2
-        elif move == 4:
-            ownhand = 1
-            opponenthand = 3
+def domove (move):
+    global ownhand
+    global opponenthand
+    if move == 1:
+        ownhand = 0
+        opponenthand = 2
+    elif move == 2:
+        ownhand = 0
+        opponenthand = 3
+    elif move == 3:
+        ownhand = 1
+        opponenthand = 2
+    elif move == 4:
+        ownhand = 1
+        opponenthand = 3
 
 
-    def medium():
-        global ownhand
-        global opponenthand
-        global valueonhand
-        listtowin = howtowincomputer(valueonhand)
-        if listtowin != []:
-            ownhand = listtowin[0]
-            #UI stuff
-            opponenthand = listtowin[1]
-        else:
-            easy()    
+def medium():
+    global ownhand
+    global opponenthand
+    global valueonhand
+    listtowin = howtowincomputer(valueonhand)
+    if listtowin != []:
+        ownhand = listtowin[0]
+        #UI stuff
+        opponenthand = listtowin[1]
+    else:
+        easy()    
 
-    def hard():
-        global movenottomake
-        global ownhand
-        global opponenthand
-        global valueonhand
-        createmovenottomake(valueonhand)
-        a = 0
-        finish = False
-        listtowin = howtowincomputer(valueonhand)
-        if listtowin !=[]:
-            ownhand = listtowin[0]
-            #UI stuff
-            opponenthand = listtowin[1]
-        elif len(movenottomake) == 4:
-            easy()
-        else:
-            while finish == False :
-                print("Entering loop 1 in hard")
+def hard():
+    global movenottomake
+    global ownhand
+    global opponenthand
+    global valueonhand
+    createmovenottomake(valueonhand)
+    a = 0
+    finish = False
+    listtowin = howtowincomputer(valueonhand)
+    if listtowin !=[]:
+        ownhand = listtowin[0]
+        #UI stuff
+        opponenthand = listtowin[1]
+    elif len(movenottomake) == 4:
+        easy()
+    else:
+        while finish == False :
+            print("Entering loop 1 in hard")
+            a = random.randint(1,4)
+            while a in movenottomake:
                 a = random.randint(1,4)
-                while a in movenottomake:
-                    a = random.randint(1,4)
-                if rhandavformove(a) == True:
-                    domove(a)
+            if rhandavformove(a) == True:
+                domove(a)
+                finish = True
+                # the finish variable stops the while block
+            else:
+                movenottomake.append(a)
+                if len(movenottomake) == 4:
+                    easy()
                     finish = True
-                    # the finish variable stops the while block
-                else:
-                    movenottomake.append(a)
-                    if len(movenottomake) == 4:
-                        easy()
-                        finish = True
+
+def computerplay(): #big function contain other funcs.
+    global ownhand
+    global valueonhand
+    global opponenthand
     if level=="e":
         print("entering easy")
         easy()
@@ -360,6 +362,7 @@ def winningscreen():
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
     global game
+    global valueonhand
     if num == 2: #should be place all the way done outside the while loop
         # winningscreen():
         t.clearscreen()
@@ -374,14 +377,17 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
         losingscreen()
         print("You lost after " + str(move) + " moves. Too bad!")
         choice = input("You wanna play again? Type 'Yes'!")
+        print(choice)
         if choice == 'Yes':
             game = True
+            valueonhand = [1, 1, 1, 1]
         else:
             game = False
 
 #-------------------end of functions---------------------
 
 #----------------------------GAME-----------------------------------
+
 
 
 beginguide()
