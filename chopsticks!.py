@@ -109,7 +109,7 @@ def beginguide(): #command.logo+instructions+level, ends with clear bg
             print("Computer starts!")
             whoseturn = "c"
         time.sleep(1)
-    t.clearscreen()
+    t.bgpic("clearscreen.gif")
 
 
 def easy(): #Changes own and opp hand. LAI
@@ -382,13 +382,17 @@ def winningscreen():
     t.ontimer(w3, 1000)
     t.ontimer(w, 1200)
 
-
+def hideturtle():
+	clhand.hideturtle()
+	crhand.hideturtle()
+	plhand.hideturtle()
+	prhand.hideturtle()
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
     global game
     global valueonhand
-    if num == 2: #should be place all the way done outside the while loop
-        t.clearscreen()
+    if num == 2:
+        hideturtle()
         winningscreen()
         print("It took you " + str(move) + " to win. Good job!")
         choice = input("You wanna play again? Type 'Yes'!")
@@ -397,7 +401,7 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
         else:
             game = False
     elif num == 1:
-        t.clearscreen()
+        hideturtle()
         losingscreen()
         print("You lost after " + str(move) + " moves. Too bad!")
         choice = input("You wanna play again? Type 'Yes'!")
