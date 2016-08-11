@@ -163,7 +163,6 @@ def createmovenottomake(handvalue): #reporter.take in valueonhand
                 if not possibilities in result:
                     result.append(possibilities)
     movenottomake = result
-    return movenottomake
 
         
 def rhandavformove(num): #take in num rep. move to take, can be 1234
@@ -389,31 +388,28 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
 #----------------------------GAME-----------------------------------
 
 
-
-beginguide()
 game = True
 while game == True:
-    handinposition()
-    while gameover(valueonhand) == False:
-        if whoseturn == "c": #to make sure the hands are not updated before a move
-            print("entering computer") #delete
-            computerplay()
-            whoseturn = "y"
-            print("finishing computer") #delete
-            finishturn()
-        if not gameover(valueonhand) == 0:
-            break
-        print("entering player") #delete
-        while whoseturn == "y":
-            print("player while loop") #delete
-            playerplay()
-            whoseturn = "c"
-        print("finishing player") #delete
-        finishturn()
-        move += 1
-        if not gameover(valueonhand) == 0:
-            break
-    finishgame(gameover(valueonhand))
+	beginguide()
+	handinposition()
+	while gameover(valueonhand) == 0:
+		if whoseturn == "c":
+			computerplay()
+			finishturn()
+			whoseturn = "y"
+		if not gameover(valueonhand) == 0:
+			break
+		print("entering player") #delete
+		while whoseturn == "y":
+			print("player while loop") #delete
+			playerplay()
+			whoseturn = "c"
+		print("finishing player") #delete
+		finishturn()
+		move += 1
+		if not gameover(valueonhand) == 0:
+			break
+		finishgame(gameover(valueonhand))
 t.bye()
 
 #-------------------------end of GAME----------------------------
