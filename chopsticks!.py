@@ -237,7 +237,7 @@ def hard():
         easy()
     else:
         while finish == False :
-            print("Entering loop 1 in hard")
+            print("Entering loop 1 in hard") #delete
             a = random.randint(1,4)
             while a in movenottomake:
                 a = random.randint(1,4)
@@ -256,7 +256,7 @@ def computerplay(): #big function contain other funcs.
     global valueonhand
     global opponenthand
     if level=="e":
-        print("entering easy")
+        print("entering easy") #delete
         easy()
     elif level=="m":
         medium()
@@ -352,7 +352,7 @@ def losingscreen():
     t.ontimer(s3, 2700)
     t.ontimer(s, 3600)
             
-def winningscreen():
+def winningscreen(): #delete or adjust @Vedi
     t.bgpic("winningscreen.gif")
     time.sleep(.2)
     t.bgpic("winningscreen2.gif")
@@ -396,26 +396,25 @@ while game == True:
     handinposition()
     while gameover(valueonhand) == False:
         if whoseturn == "c": #to make sure the hands are not updated before a move
-            print("entering computer")
+            print("entering computer") #delete
             computerplay()
             whoseturn = "y"
-            print("finishing computer")
+            print("finishing computer") #delete
             finishturn()
         if not gameover(valueonhand) == 0:
             break
-        print("entering player")
+        print("entering player") #delete
         while whoseturn == "y":
-            print("player while loop")
+            print("player while loop") #delete
             playerplay()
             whoseturn = "c"
-        print("finishing player")
+        print("finishing player") #delete
         finishturn()
         move += 1
         if not gameover(valueonhand) == 0:
             break
     finishgame(gameover(valueonhand))
 t.bye()
-        
 
 #-------------------------end of GAME----------------------------
 
