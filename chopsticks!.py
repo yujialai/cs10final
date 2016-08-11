@@ -59,6 +59,7 @@ whowin="" #going to be used for demostratingh winning/losing screen
 
 
 def handinposition():
+	global move
     valueonhand = [1, 1, 1, 1]
     clhand.penup()
     crhand.penup()
@@ -72,6 +73,11 @@ def handinposition():
     crhand.shape(cr1)
     plhand.shape(pl1)
     prhand.shape(pr1)
+    clhand.showturtle()
+    crhand.showturtle()
+    plhand.showturtle()
+    prhand.showturtle()
+    move = 0
     
 def beginguide(): #command.logo+instructions+level, ends with clear bg
     global level
@@ -148,7 +154,7 @@ def medium():
 def createmovenottomake(handvalue): #reporter.take in valueonhand
     global movenottomake
     resultsofpossiblemoves = []
-    playershand = []
+    computerhand = []
     result = []
     for comp in range(0,2):
         for player in range(2,4):
@@ -156,14 +162,17 @@ def createmovenottomake(handvalue): #reporter.take in valueonhand
                 resultsofpossiblemoves.append(handvalue[player] + handvalue[comp] -5)
             else:
                 resultsofpossiblemoves.append(handvalue[player] + handvalue[comp])   
-    for player in range(0,2):
-        playershand.append(handvalue[player])
-    for player in range(0,2):
-        for possibilities in range(0,4):
-            if playershand[player] + resultsofpossiblemoves[possibilities] == 5:
-                if not possibilities in result:
-                    result.append(possibilities)
+    for comp in range(0,2):
+        computerhand.append(handvalue[comp])
+    for possibilities in range(0,4):
+        for comp in range(0,2):
+            if computerhand[comp] + resultsofpossiblemoves[possibilities] == 5:
+                if not possibilities+1 in result:
+                    result.append(possibilities+1)
     movenottomake = result
+    print(resultsofpossiblemoves)
+    print(movenottomake)
+    print(computerhand)
 
         
 def rhandavformove(num): #take in num rep. move to take, can be 1234
@@ -191,7 +200,8 @@ def rhandavformove(num): #take in num rep. move to take, can be 1234
                         return False
                     else:
                         return True
-def domove (move):
+
+def domove (move): #sets ownhand and opponenthand
     global ownhand
     global opponenthand
     if move == 1:
@@ -215,7 +225,6 @@ def medium():
     listtowin = howtowincomputer(valueonhand)
     if listtowin != []:
         ownhand = listtowin[0]
-        #UI stuff
         opponenthand = listtowin[1]
     else:
         easy()
@@ -371,6 +380,7 @@ def winningscreen():
     t.ontimer(w, 600)
     t.ontimer(w2, 800)
     t.ontimer(w3, 1000)
+    t.ontimer(w, 1200)
 
 
 
@@ -416,6 +426,7 @@ while game == True:
 	handinposition()
 	while gameover(valueonhand) == 0:
 		if whoseturn == "c":
+			time.sleep(2)
 			computerplay()
 			finishturn()
 			whoseturn = "y"
