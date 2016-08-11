@@ -346,27 +346,40 @@ def s3():
 
 
 def losingscreen():
-    t.ontimer(s, 0)
-    t.ontimer(s1, 900)
-    t.ontimer(s2, 1800)
-    t.ontimer(s3, 2700)
-    t.ontimer(s, 3600)
+    s()
+    t.ontimer(s1, 100)
+    t.ontimer(s2, 200)
+    t.ontimer(s3, 300)
+    t.ontimer(s, 400)
+    t.ontimer(s1, 500)
+    t.ontimer(s2, 600)
+    t.ontimer(s3, 700)
+    t.ontimer(s, 800)
             
+def w():
+    t.bgpic("winnerscreen.gif")
+def w2():
+    t.bgpic("winnerscreen2.gif")
+def w3():
+    t.bgpic("winnerscreen3.gif")
+
 def winningscreen():
-    t.bgpic("winningscreen.gif")
-    time.sleep(.2)
-    t.bgpic("winningscreen2.gif")
-    time.sleep(.2)
-    t.bgpic("winningscreen3.gif")
+    w()
+    t.ontimer(w2, 200)
+    t.ontimer(w3, 400)
+    t.ontimer(w, 600)
+    t.ontimer(w2, 800)
+    t.ontimer(w3, 1000)
 
 
 def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print score in terminal/shell
     global game
     global valueonhand
     if num == 2: #should be place all the way done outside the while loop
-        # winningscreen():
         t.clearscreen()
-        t.bgpic("winnerscreen.gif")
+        winningscreen()
+        # t.clearscreen()
+        # t.bgpic("winnerscreen.gif")
         print("It took you " + str(move) + " to win. Good job!")
         choice = input("You wanna play again? Type 'Yes'!")
         if choice == 'Yes':
@@ -374,6 +387,7 @@ def finishgame(num): #command,input0/1/2 from gameover(),show w/l screen+print s
         else:
             game = False
     elif num == 1:
+        t.clearscreen()
         losingscreen()
         print("You lost after " + str(move) + " moves. Too bad!")
         choice = input("You wanna play again? Type 'Yes'!")

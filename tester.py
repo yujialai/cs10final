@@ -40,22 +40,22 @@
 #     accept = raw_input('OK? ')
 
 import turtle as t
-def s():
-	t.bgpic("looserscreen.gif")
-def s1():
-	t.bgpic("looserscreen2.gif")
-def s2():
-	t.bgpic("looserscreen3.gif")
-def s3():
-	t.bgpic("looserscreen4.gif")
+# def s():
+# 	t.bgpic("looserscreen.gif")
+# def s1():
+# 	t.bgpic("looserscreen2.gif")
+# def s2():
+# 	t.bgpic("looserscreen3.gif")
+# def s3():
+# 	t.bgpic("looserscreen4.gif")
 
-import time
+# import time
 
-t.ontimer(s, 0)
-t.ontimer(s1, 900)
-t.ontimer(s2, 1800)
-t.ontimer(s3, 2700)
-t.ontimer(s, 3600)
+# t.ontimer(s, 0)
+# t.ontimer(s1, 900)
+# t.ontimer(s2, 1800)
+# t.ontimer(s3, 2700)
+# t.ontimer(s, 3600)
 
 # t.bgpic("looserscreen2.gif")
 # time.sleep(10)
@@ -64,7 +64,26 @@ t.ontimer(s, 3600)
 # t.bgpic("looserscreen4.gif")
 
 
+def s():
+    t.bgpic("looserscreen.gif")
+def s1():
+    t.bgpic("looserscreen2.gif")
+def s2():
+    t.bgpic("looserscreen3.gif")
+def s3():
+    t.bgpic("looserscreen4.gif")
 
+
+def losingscreen():
+	s()
+	t.ontimer(s1, 100)
+	t.ontimer(s2, 200)
+	t.ontimer(s3, 300)
+	t.ontimer(s, 400)
+	t.ontimer(s1, 500)
+	t.ontimer(s2, 600)
+	t.ontimer(s3, 700)
+	t.ontimer(s, 800)
 
 
 
